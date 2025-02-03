@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 28, 2025 at 08:01 PM
+-- Generation Time: Feb 03, 2025 at 05:17 PM
 -- Server version: 11.4.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `carts`
+-- Table structure for table `tbl_carts`
 --
 
-CREATE TABLE `carts` (
+CREATE TABLE `tbl_carts` (
   `CART_ID` bigint(20) NOT NULL,
   `USER_ID` bigint(20) NOT NULL,
   `PRO_ID` bigint(20) NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `carts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Table structure for table `tbl_orders`
 --
 
-CREATE TABLE `orders` (
+CREATE TABLE `tbl_orders` (
   `ORDER_ID` bigint(20) NOT NULL,
   `USER_ID` bigint(20) DEFAULT NULL,
   `ORDER_STAMP` timestamp NULL DEFAULT current_timestamp(),
@@ -57,13 +57,23 @@ CREATE TABLE `orders` (
   `ORDER_PAYMENT_CONFIRM` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_orders`
+--
+
+INSERT INTO `tbl_orders` (`ORDER_ID`, `USER_ID`, `ORDER_STAMP`, `ORDER_STATUS`, `ORDER_CANCEL`, `ORDER_PRICE`, `ORDER_PAYMENT_IMAGE`, `ORDER_PAYMENT_PRICE`, `ORDER_CUS_NAME`, `ORDER_CUS_PHONE`, `ORDER_CUS_ADDRESS`, `ORDER_PAYMENT_CONFIRM`) VALUES
+(1, 2, '2025-01-28 19:43:12', 1, NULL, 30.00, 'image_6799335030fa23.66039223.png', 30.00, 'USER USER', '0987654123', ' ggggg', 1),
+(2, 2, '2025-02-01 01:51:31', 1, NULL, 160.00, 'image_679d7e23374e48.17088306.png', 33333.00, 'USER USER', '0987654123', ' ggggg', 1),
+(3, 2, '2025-02-01 02:00:23', 1, NULL, 30.00, 'image_679d8037a1cdf2.86594878.png', 66.00, 'USER USER', '0987654123', ' ffff', 0),
+(4, 2, '2025-02-03 16:11:45', 1, NULL, 80.00, 'image_67a0eac1f1cd96.18590059.png', 12212.00, 'USER USER', '0987654123', ' ffff', NULL);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_lists`
+-- Table structure for table `tbl_order_lists`
 --
 
-CREATE TABLE `order_lists` (
+CREATE TABLE `tbl_order_lists` (
   `OLIST_ID` bigint(20) NOT NULL,
   `ORDER_ID` bigint(20) DEFAULT NULL,
   `PRO_ID` bigint(20) DEFAULT NULL,
@@ -74,13 +84,25 @@ CREATE TABLE `order_lists` (
   `PRO_NAME` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_order_lists`
+--
+
+INSERT INTO `tbl_order_lists` (`OLIST_ID`, `ORDER_ID`, `PRO_ID`, `OLIST_NUMBER`, `OLIST_PRICE`, `OLIST_CANCEL`, `OLIST_STATUS`, `PRO_NAME`) VALUES
+(1, 1, 2, 1, 80.00, NULL, NULL, 'ขนมปัง 2'),
+(2, 1, 3, 1, 30.00, NULL, NULL, 'ขนมปัง 3'),
+(3, 2, 2, 2, 80.00, NULL, NULL, 'ขนมปัง 2'),
+(4, 3, 3, 1, 30.00, NULL, NULL, 'ขนมปัง 3'),
+(5, 4, 1, 1, 50.00, NULL, NULL, 'ขนมปัง 1'),
+(6, 4, 2, 1, 80.00, NULL, NULL, 'ขนมปัง 2');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Table structure for table `tbl_products`
 --
 
-CREATE TABLE `products` (
+CREATE TABLE `tbl_products` (
   `PRO_ID` bigint(20) NOT NULL,
   `PRO_NAME` varchar(50) DEFAULT NULL,
   `PRO_PRICE` decimal(10,2) DEFAULT NULL,
@@ -94,13 +116,23 @@ CREATE TABLE `products` (
   `PRO_STOCK` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='สินค้า';
 
+--
+-- Dumping data for table `tbl_products`
+--
+
+INSERT INTO `tbl_products` (`PRO_ID`, `PRO_NAME`, `PRO_PRICE`, `PRO_STAMP`, `PRO_DETAILS`, `PRO_PHOTO`, `USER_ID`, `PRO_DELETE`, `PRO_STATUS`, `PRO_GROUP_NAME`, `PRO_STOCK`) VALUES
+(1, 'ขนมปัง 1', 50.00, '2025-01-28 19:40:46', 'ขนมปัง 1', 'image_679932be8e7f30.11107014.jpg', 1, NULL, '1', 'ขนมปัง', 89),
+(2, 'ขนมปัง 2', 80.00, '2025-01-28 19:41:06', 'ขนมปัง 1', 'image_679932d29aa224.74119681.jpg', 1, NULL, '1', 'ขนมปัง', 46),
+(3, 'ขนมปัง 3', 30.00, '2025-01-28 19:41:30', 'ขนมปัง 3', 'image_679932ea7f1695.29615590.jpg', 1, NULL, '1', 'ขนมปัง', 88),
+(4, 'ขนมปัง 4', 50.00, '2025-01-28 19:41:52', 'ขนมปัง 4', 'image_679933006dd0f5.16310445.jpg', 1, NULL, '1', 'ขนมปัง', 90);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `tbl_users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `tbl_users` (
   `USER_ID` bigint(20) NOT NULL,
   `USER_FNAME` varchar(50) DEFAULT NULL,
   `USER_LNAME` varchar(50) DEFAULT NULL,
@@ -109,23 +141,23 @@ CREATE TABLE `users` (
   `USER_USERNAME` varchar(50) DEFAULT NULL,
   `USER_PASSWORD` varchar(50) DEFAULT NULL,
   `USER_STAMP` timestamp NOT NULL DEFAULT current_timestamp(),
-  `USER_ROLE` enum('USER','ADMIN') NOT NULL DEFAULT 'USER',
+  `USER_ROLE` enum('USER','ADDMIN','ADMIN') NOT NULL DEFAULT 'USER',
   `USER_DELETE` enum('1') DEFAULT NULL,
   `USER_DELETE_TIME` datetime DEFAULT NULL,
   `USER_DELETE_USER` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='ผู้ใช้';
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `users` (`USER_ID`, `USER_FNAME`, `USER_LNAME`, `USER_PHONE`, `USER_ADDRESS`, `USER_USERNAME`, `USER_PASSWORD`, `USER_STAMP`, `USER_ROLE`, `USER_DELETE`, `USER_DELETE_TIME`, `USER_DELETE_USER`) VALUES
-(1, 'ADMIN', 'ADMIN', '0987654123', '-', 'ADMIN', 'ADMIN', '2025-01-13 18:34:46', 'ADMIN', NULL, NULL, NULL),
-(2, 'USER', 'USER', '0987654123', 'ggggg', 'USER', 'USER', '2025-01-13 19:09:22', 'USER', NULL, NULL, NULL),
+INSERT INTO `tbl_users` (`USER_ID`, `USER_FNAME`, `USER_LNAME`, `USER_PHONE`, `USER_ADDRESS`, `USER_USERNAME`, `USER_PASSWORD`, `USER_STAMP`, `USER_ROLE`, `USER_DELETE`, `USER_DELETE_TIME`, `USER_DELETE_USER`) VALUES
+(1, 'ADMINf', 'ADMINf', '0987654123', '-', 'ADMIN', 'ADMIN', '2025-01-13 18:34:46', 'ADMIN', NULL, NULL, NULL),
+(2, 'USER', 'USER', '0987654123', 'ffffgggg', 'USER', 'USER', '2025-01-13 19:09:22', 'USER', NULL, NULL, NULL),
 (3, 'ggg', 'ggg', 'ggg', 'ggg', 'ggg', 'ggh', '2025-01-15 15:25:19', 'USER', '1', NULL, NULL),
 (4, 'ggg', 'ggg', 'ggg', 'USER', 'USER', 'USER', '2025-01-15 15:39:42', 'USER', '1', NULL, NULL),
-(5, 'ggg', 'ggg', 'ggg', 'root', 'root', 'root', '2025-01-15 15:42:39', 'USER', NULL, NULL, NULL),
-(6, 'ggg', 'ggg', 'ggg', 'f', 'rootf', '12345678', '2025-01-15 15:46:12', 'ADMIN', NULL, NULL, NULL),
+(5, 'gggjjj', 'gggjjj', 'gggjjj', 'rootjjjj', 'root', 'root', '2025-01-15 15:42:39', 'USER', '1', NULL, NULL),
+(6, 'gggghh', 'ggghh', 'ggg', 'fhhhhh', 'rootf', '12345678', '2025-01-15 15:46:12', 'ADMIN', NULL, NULL, NULL),
 (7, 'กา', 'ก', '0987654321', 'fggg', 'USER1', 'USER1', '2025-01-16 23:47:13', 'USER', NULL, NULL, NULL);
 
 --
@@ -133,39 +165,39 @@ INSERT INTO `users` (`USER_ID`, `USER_FNAME`, `USER_LNAME`, `USER_PHONE`, `USER_
 --
 
 --
--- Indexes for table `carts`
+-- Indexes for table `tbl_carts`
 --
-ALTER TABLE `carts`
+ALTER TABLE `tbl_carts`
   ADD PRIMARY KEY (`CART_ID`),
   ADD KEY `cPR_ID` (`PRO_ID`),
   ADD KEY `cUSER_ID` (`USER_ID`);
 
 --
--- Indexes for table `orders`
+-- Indexes for table `tbl_orders`
 --
-ALTER TABLE `orders`
+ALTER TABLE `tbl_orders`
   ADD PRIMARY KEY (`ORDER_ID`),
   ADD KEY `PUSER_IDs` (`USER_ID`);
 
 --
--- Indexes for table `order_lists`
+-- Indexes for table `tbl_order_lists`
 --
-ALTER TABLE `order_lists`
+ALTER TABLE `tbl_order_lists`
   ADD PRIMARY KEY (`OLIST_ID`),
   ADD KEY `OLIST_ORER` (`ORDER_ID`),
   ADD KEY `OLIST_PRO` (`PRO_ID`);
 
 --
--- Indexes for table `products`
+-- Indexes for table `tbl_products`
 --
-ALTER TABLE `products`
+ALTER TABLE `tbl_products`
   ADD PRIMARY KEY (`PRO_ID`),
   ADD KEY `PUSER_ID` (`USER_ID`);
 
 --
--- Indexes for table `users`
+-- Indexes for table `tbl_users`
 --
-ALTER TABLE `users`
+ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`USER_ID`);
 
 --
@@ -173,33 +205,33 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `carts`
+-- AUTO_INCREMENT for table `tbl_carts`
 --
-ALTER TABLE `carts`
-  MODIFY `CART_ID` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_carts`
+  MODIFY `CART_ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT for table `tbl_orders`
 --
-ALTER TABLE `orders`
-  MODIFY `ORDER_ID` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_orders`
+  MODIFY `ORDER_ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `order_lists`
+-- AUTO_INCREMENT for table `tbl_order_lists`
 --
-ALTER TABLE `order_lists`
-  MODIFY `OLIST_ID` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_order_lists`
+  MODIFY `OLIST_ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table `tbl_products`
 --
-ALTER TABLE `products`
-  MODIFY `PRO_ID` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_products`
+  MODIFY `PRO_ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `tbl_users`
 --
-ALTER TABLE `users`
+ALTER TABLE `tbl_users`
   MODIFY `USER_ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
@@ -207,30 +239,30 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `carts`
+-- Constraints for table `tbl_carts`
 --
-ALTER TABLE `carts`
-  ADD CONSTRAINT `cPR_ID` FOREIGN KEY (`PRO_ID`) REFERENCES `products` (`PRO_ID`),
-  ADD CONSTRAINT `cUSER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`);
+ALTER TABLE `tbl_carts`
+  ADD CONSTRAINT `cPR_ID` FOREIGN KEY (`PRO_ID`) REFERENCES `tbl_products` (`PRO_ID`),
+  ADD CONSTRAINT `cUSER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `tbl_users` (`USER_ID`);
 
 --
--- Constraints for table `orders`
+-- Constraints for table `tbl_orders`
 --
-ALTER TABLE `orders`
-  ADD CONSTRAINT `PUSER_IDs` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`);
+ALTER TABLE `tbl_orders`
+  ADD CONSTRAINT `PUSER_IDs` FOREIGN KEY (`USER_ID`) REFERENCES `tbl_users` (`USER_ID`);
 
 --
--- Constraints for table `order_lists`
+-- Constraints for table `tbl_order_lists`
 --
-ALTER TABLE `order_lists`
-  ADD CONSTRAINT `OLIST_ORER` FOREIGN KEY (`ORDER_ID`) REFERENCES `orders` (`ORDER_ID`),
-  ADD CONSTRAINT `OLIST_PRO` FOREIGN KEY (`PRO_ID`) REFERENCES `products` (`PRO_ID`);
+ALTER TABLE `tbl_order_lists`
+  ADD CONSTRAINT `OLIST_ORER` FOREIGN KEY (`ORDER_ID`) REFERENCES `tbl_orders` (`ORDER_ID`),
+  ADD CONSTRAINT `OLIST_PRO` FOREIGN KEY (`PRO_ID`) REFERENCES `tbl_products` (`PRO_ID`);
 
 --
--- Constraints for table `products`
+-- Constraints for table `tbl_products`
 --
-ALTER TABLE `products`
-  ADD CONSTRAINT `PUSER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`USER_ID`);
+ALTER TABLE `tbl_products`
+  ADD CONSTRAINT `PUSER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `tbl_users` (`USER_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
